@@ -3,8 +3,57 @@
  * @returns {Array} deck - a deck of cards
  */
 const getDeck = () => {
+  const suits = ['hearts', 'spades', 'clubs', 'diamonds']
+  const deck = []
+  
+  for (let i = 0; i < suits.length; i++) {
+    // create an array of 13 objects
 
+    for (let j = 1; j <= 13; j++) {
+
+      let  value, display
+      switch (j) {
+        case 1:
+          display = 'Ace';
+          value = 1;
+          break;
+        case 11:
+          display = "Jack";
+          value = 10;
+          break;
+        case 12:
+          display = "Queen";
+          value = 10;
+          break;
+        case 13:
+          display = "King";
+          value = 10;
+        break;      
+        default:
+          display = j.toString();
+          value = j;
+      }
+      //create card
+      const card = {
+        suit: suits[i],
+        val: value,
+        displayVal: display,
+      }
+      
+      //change ACE value to 11
+      if (display === "Ace"){
+       card.val = 11
+      }      
+      
+      deck.push(card)
+      console.log(card)
+    }
+  }
+  return deck
 }
+
+
+
 
 
 
