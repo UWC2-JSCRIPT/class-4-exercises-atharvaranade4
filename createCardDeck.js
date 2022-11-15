@@ -7,8 +7,8 @@ const getDeck = () => {
   const deck = []
   
   for (let i = 0; i < suits.length; i++) {
-    // create an array of 13 objects
 
+    // create an array of 13 objects
     for (let j = 1; j <= 13; j++) {
 
       let  value, display
