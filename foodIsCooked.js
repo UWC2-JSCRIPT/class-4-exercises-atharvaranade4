@@ -16,10 +16,10 @@ const foodIsCooked = function(kind, internalTemp, doneness) {
     }
   } else if (kind === "beef"){
     if (doneness === "rare"){
-      return (internalTemp >125)
+      return (internalTemp > 125 && internalTemp <= 138)
     }
     else if (doneness === "medium"){
-      return (internalTemp > 138)
+      return (internalTemp > 138 && internalTemp <= 155)
     }
     else if (doneness === "well"){
       return (internalTemp > 155)
