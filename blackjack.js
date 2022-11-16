@@ -120,6 +120,8 @@ const determineWinner = (playerScore, dealerScore) => {
   Winner: ${result}`
 }
 
+
+
 /**
  * Creates user prompt to ask if they'd like to draw a card
  * @param {number} count 
@@ -135,8 +137,15 @@ const getMessage = (count, dealerCard) => {
  */
 const showHand = (player) => {
   const displayHand = player.hand.map((card) => card.displayVal);
-  console.log(`${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`);
+  const displayResult = `${player.name}'s hand is ${displayHand.join(', ')} (${calcPoints(player.hand).total})`;
+  console.log(displayResult)
+
+  // EXTRA CREDIT
+  //push value into HTML DOM
+  document.getElementById("result").innerHTML = displayResult;
 }
+
+
 
 /**
  * Runs Blackjack Game
@@ -147,8 +156,23 @@ const startGame = function() {
   player.drawCard();
   dealer.drawCard();
 
+  // EXTRA CREDIT
+  let dealerScore = calcPoints(dealer.hand).total;  
+  if (dealerScore === 21){
+    showHand(player)
+    return `Dealer wins: Gets exactly 21 after drawing first 2 cards`
+  }
+
   let playerScore = calcPoints(player.hand).total;
+  if (playerScore === 21){
+    showHand(player)
+    return `Player wins: Gets exactly 21 after drawing first 2 cards`
+  }
+
   showHand(player);
+
+
+
   while (playerScore < 21 && confirm(getMessage(playerScore, dealer.hand[0]))) {
     player.drawCard();
     playerScore = calcPoints(player.hand).total;
@@ -159,7 +183,7 @@ const startGame = function() {
   }
   console.log(`Player stands at ${playerScore}`);
 
-  let dealerScore = calcPoints(dealer.hand).total;
+  //let dealerScore = calcPoints(dealer.hand).total;
   while (dealerScore < 21 && dealerShouldDraw(dealer.hand)) {
     dealer.drawCard();
     dealerScore = calcPoints(dealer.hand).total;
@@ -173,3 +197,4 @@ const startGame = function() {
   return determineWinner(playerScore, dealerScore);
 }
 console.log(startGame());
+
